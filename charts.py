@@ -5,7 +5,7 @@ import pylab as pl
 import matplotlib.pyplot as plt
 import numpy as np
 
-def barChart():
+def barChart(title="Nothing"):
 	dataY = [-8.51,0.27,0.52] #Import data from csv
 	dataX = ['Energy For Production','GDP','Household Consumption']
 	n_groups = len(dataX)
@@ -15,7 +15,8 @@ def barChart():
 	fig,a = plt.subplots()
 	plt.axhline(y = 0,xmin=0,xmax=4,linewidth = 2) #for horizontal line plotting
 	# p1=a.bar(dataY	,dataX)
-	p1 = plt.bar(index,dataY,bar_width,alpha=0.4,color='b',label = 'Nothing')
+	p1 = plt.bar(index,dataY,bar_width,alpha=0.4,color='b')
+	plt.title(title)
 	plt.xticks(index + bar_width/2, dataX)
 	print(a.get_position())
 
@@ -32,7 +33,7 @@ def barChart():
 	plt.show()
 
 
-def barChart_Longer(dataX,dataY):
+def barChart_Longer(dataX,dataY,title):
 
 	# dataY = [-8.51,0.27,0.52] #Import data from csv
 	# dataX = ['Energy For Production','GDP','Household Consumption']
@@ -44,6 +45,7 @@ def barChart_Longer(dataX,dataY):
 	plt.axhline(y = 0,xmin=0,xmax=4,linewidth = 2) #for horizontal line plotting
 	# p1=a.bar(dataY	,dataX)
 	p1 = plt.bar(index,dataY,bar_width,alpha=0.4,color='b',label = 'Nothing')
+	plt.title(title)
 	plt.xticks(index + bar_width/2, dataX,rotation='vertical')
 	print(a.get_position())
 
@@ -66,7 +68,7 @@ def barChart_Longer(dataX,dataY):
 	plt.tight_layout()
 	plt.show()
 
-def scatterPlot(dataX,dataY):
+def scatterPlot(dataX,dataY,title):
 
 	# http://stackoverflow.com/questions/7908636/possible-to-make-labels-appear-when-hovering-over-a-point-in-matplotlib
 	# Check above link for implementing hover over
@@ -77,6 +79,7 @@ def scatterPlot(dataX,dataY):
 	area = x*y  # 0 to 15 point radiuses
 	fig,a = plt.subplots()
 	plt.scatter(dataX, dataY, s=area, alpha=0.5)
+	plt.title(title)
 
 	def onpick(event):
 		thisline = event.artist
@@ -350,8 +353,9 @@ if __name__ == '__main__':
 		7.870655485,
 		1.176761765]
 
-	# barChart_Longer(fig6adataX,fig6adataY) #for 6a
-	# barChart_Longer(fig6bdataX,fig6bdataY) #for 6b
-	# barChart_Longer(fig6cdataX,fig6cdataY) #for 6c
+	barChart(title='Aggregate Index')
+	barChart_Longer(fig6adataX,fig6adataY,title="sectors with largest increase/decrease in Armington value") #for 6a
+	barChart_Longer(fig6bdataX,fig6bdataY,title="sectors with largest drop in local market price") #for 6b
+	barChart_Longer(fig6cdataX,fig6cdataY,title="sectors with largest increase/decrease in production level") #for 6c
 
-	scatterPlot(fig7dataX,fig7dataY) #for 7
+	scatterPlot(fig7dataX,fig7dataY,title='% change in economy wide non-elec consumption') #for 7
